@@ -10,18 +10,14 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
     @Override
-    public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/websocket-example")
+    public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
+        stompEndpointRegistry.addEndpoint("/websocket-example")
                 .withSockJS();
-
     }
-    //Override the default message broker (the broker name which we wanted
-    // )
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) { //Broker information
-        registry.enableSimpleBroker("topic"); // push the message
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/topic");
         registry.setApplicationDestinationPrefixes("/app");
-
     }
 }
